@@ -22,3 +22,14 @@
   border-radius: 7%;
   color: white;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.wallet {
+  display: flex;
+  flex-direction: column;
+}

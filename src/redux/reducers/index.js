@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import user from './user';
-// import wallet from './wallet';
+// import currency from './wallet';
+// import currency from './currency';
+import wallet from './wallet';
 
 const rootReducer = combineReducers({
   user,
-  // wallet,
+  wallet,
 });
 
 export default rootReducer;

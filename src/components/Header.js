@@ -7,9 +7,13 @@ class Header extends Component {
     const { user } = this.props;
     return (
       <div className="header">
-        <span data-testid="email-field">{ user }</span>
-        <span data-testid="total-field">0</span>
-        <span data-testid="header-currency-field">BRL</span>
+        <div>
+          <span id="email-header" data-testid="email-field">{ user }</span>
+        </div>
+        <div>
+          <span data-testid="total-field">0</span>
+          <span data-testid="header-currency-field">BRL</span>
+        </div>
       </div>
     );
   }
