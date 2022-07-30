@@ -21,6 +21,25 @@ export const receiveFailure = (error) => ({
   error,
 });
 
+export const receiveQuote = (quote) => ({
+  type: 'RECEIVE_QUOTE',
+  quote,
+});
+
+export function expense(expenses) {
+  return {
+    type: 'EXPENSES',
+    expenses,
+  };
+}
+
+export function fetchQuote() {
+  return async (dispatch) => {
+    const response = await getCurrency();
+    dispatch(receiveQuote(response));
+  };
+}
+
 export function fetchCurrency() {
   return async (dispatch) => {
     // console.log('valor do getState: ', getState);

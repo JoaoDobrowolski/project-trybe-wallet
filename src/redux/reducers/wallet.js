@@ -2,6 +2,8 @@
 const INITIAL_STATE = {
   currencies: [],
   loading: false,
+  quote: {},
+  // expenses: [],
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
@@ -17,13 +19,22 @@ const wallet = (state = INITIAL_STATE, action) => {
       loading: false,
       currencies: Object.keys(action.currencies)
         .filter((element) => !element.includes('USDT')),
-      // currencies: Object.keys(action.currencies).map((key) => [Number(key), action.currencies[key]]),
     };
   case 'RECEIVE_FAILURE':
     return {
       ...state,
       loading: false,
       error: action.error,
+    };
+  case 'RECEIVE_QUOTE':
+    return {
+      ...state,
+      quote: action.quote,
+    };
+  case 'EXPENSES':
+    return {
+      ...state,
+      expenses: action.expenses,
     };
   default:
     return state;
