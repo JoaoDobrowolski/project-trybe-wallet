@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { expense, fetchCurrency, fetchQuote } from '../redux/actions';
 
+const alimentacao = 'Alimentação';
+
 class WalletForm extends Component {
   constructor() {
     super();
@@ -12,8 +14,8 @@ class WalletForm extends Component {
       value: '',
       description: '',
       currency: 'USD',
-      method: '',
-      tag: '',
+      method: 'Dinheiro',
+      tag: alimentacao,
       exchangeRates: {},
     };
   }
@@ -33,15 +35,28 @@ class WalletForm extends Component {
 
   createObj = () => {
     const { id, value, description, currency, method, tag, exchangeRates } = this.state;
-    const obj = {
-      id,
-      value,
-      description,
-      currency,
-      method,
-      tag,
-      exchangeRates,
-    };
+    let obj = {};
+    if (value === '') {
+      obj = {
+        id,
+        value: 0,
+        description,
+        currency,
+        method,
+        tag,
+        exchangeRates,
+      };
+    } else {
+      obj = {
+        id,
+        value,
+        description,
+        currency,
+        method,
+        tag,
+        exchangeRates,
+      };
+    }
     this.setState((prevState) => ({
       id: id + 1,
       expenses: [...prevState.expenses, obj],
@@ -61,7 +76,7 @@ class WalletForm extends Component {
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
-      tag: 'Alimentação',
+      tag: alimentacao,
     });
     const { expenses } = this.state;
     const { prices } = this.props;
@@ -138,7 +153,7 @@ class WalletForm extends Component {
             value={ tag }
             onChange={ this.handleChange }
           >
-            <option value="Alimentação">Alimentação</option>
+            <option value={ alimentacao }>Alimentação</option>
             <option value="Lazer">Lazer</option>
             <option value="Trabalho">Trabalho</option>
             <option value="Transporte">Transporte</option>
