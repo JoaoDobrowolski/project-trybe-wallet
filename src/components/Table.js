@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import toRound from '../rounder';
+import { expense } from '../redux/actions';
 
 class Table extends Component {
-  // toRound = (num) => { // https://www.delftstack.com/pt/howto/javascript/javascript-round-to-2-decimal-places/#:~:text=decimais%20em%20JavaScript.-,Use%20o%20m%C3%A9todo%20.,ap%C3%B3s%20o%20decimal%20como%20argumento.
-  //   const quinze = 15;
-  //   const centezimo = 0.01;
-  //   const aux = Number((Math.abs(num) * 100).toPrecision(quinze)); // OBS: (Math.round(number + 'e+2') + 'e-2') não é permitido devido ao lint
-  //   return (Math.round(aux) * centezimo * Math.sign(aux)).toFixed(2);
-  // };
+  handleDeleteButton = (id) => {
+    const { expenses } = this.props;
+    const newExpense = expenses.filter((expenseDeleted) => expenseDeleted.id !== id);
+    const { prices } = this.props;
+    prices(newExpense);
+  };
 
   render() {
     const { expenses } = this.props;
@@ -51,8 +52,22 @@ class Table extends Component {
                     </td>
                     <td>Real</td>
                     <td>
-                      <button type="button">Editar</button>
-                      <button type="button">Excluir</button>
+                      <button
+                        id="edit-button"
+                        data-testid="edit-btn"
+                        type="button"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        id="delete-button"
+                        name="deleteButton"
+                        type="button"
+                        data-testid="delete-btn"
+                        onClick={ () => this.handleDeleteButton(element.id) }
+                      >
+                        Excluir
+                      </button>
                     </td>
                   </tr>
                 ))
@@ -66,10 +81,15 @@ class Table extends Component {
 
 Table.propTypes = {
   expenses: PropTypes.arrayOf(Object).isRequired,
+  prices: PropTypes.arrayOf(Object).isRequired,
 };
 
 const mapStateToProps = (store) => ({
   expenses: store.wallet.expenses,
 });
 
-export default connect(mapStateToProps)(Table);
+const mapDispatchToProps = (dispatch) => ({
+  prices: (expensesAfterDelete) => dispatch(expense(expensesAfterDelete)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

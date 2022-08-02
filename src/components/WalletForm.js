@@ -34,7 +34,8 @@ class WalletForm extends Component {
   };
 
   createObj = () => {
-    const { id, value, description, currency, method, tag, exchangeRates } = this.state;
+    const { id, value, description, currency, method,
+      tag, exchangeRates } = this.state;
     let obj = {};
     if (value === '') {
       obj = {
@@ -57,28 +58,28 @@ class WalletForm extends Component {
         exchangeRates,
       };
     }
-    this.setState((prevState) => ({
+    const { newExpenses } = this.props; // do mapState
+    this.setState({
       id: id + 1,
-      expenses: [...prevState.expenses, obj],
-    }));
+      expenses: [...newExpenses, obj], // ajuda do Dhiego
+    });
   };
 
   handleClick = async () => {
-    // const { currency } = this.state;
     const { getQuote } = this.props;
     await getQuote();
     const { quote } = this.props;
-    // this.setState({ exchangeRates: quote[currency].ask });
     this.setState({ exchangeRates: quote });
     this.createObj();
+    const { expenses } = this.state;
     this.setState({
+      expenses,
       value: '',
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
       tag: alimentacao,
     });
-    const { expenses } = this.state;
     const { prices } = this.props;
     prices(expenses);
   };
@@ -180,12 +181,13 @@ WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   quote: PropTypes.shape({}).isRequired,
   prices: PropTypes.func.isRequired,
+  newExpenses: PropTypes.shape({}).isRequired,
 };
 
 const mapStateToProps = (store) => ({
   currencies: store.wallet.currencies,
   quote: store.wallet.quote,
-  // expenses: store.wallet.expenses,
+  newExpenses: store.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
