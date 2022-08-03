@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import toRound from '../rounder';
-import { expense } from '../redux/actions';
+import { editButton, expense } from '../redux/actions';
 
 class Table extends Component {
   handleDeleteButton = (id) => {
-    const { expenses } = this.props;
+    const { expenses } = this.props; // mapState
     const newExpense = expenses.filter((expenseDeleted) => expenseDeleted.id !== id);
     const { prices } = this.props;
-    prices(newExpense);
+    prices(newExpense); // dispatch
+  };
+
+  handleEditButton = (id) => {
+    const { isEditDisabled } = this.props; // mapState
+    isEditDisabled(false, id); // dispatch
+    console.log('editar: false');
   };
 
   render() {
@@ -56,6 +62,7 @@ class Table extends Component {
                         id="edit-button"
                         data-testid="edit-btn"
                         type="button"
+                        onClick={ () => this.handleEditButton(element.id) }
                       >
                         Editar
                       </button>
@@ -82,6 +89,7 @@ class Table extends Component {
 Table.propTypes = {
   expenses: PropTypes.arrayOf(Object).isRequired,
   prices: PropTypes.arrayOf(Object).isRequired,
+  isEditDisabled: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (store) => ({
@@ -90,6 +98,9 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   prices: (expensesAfterDelete) => dispatch(expense(expensesAfterDelete)),
+  isEditDisabled: (isEditButtonDisabled, id) => (
+    dispatch(editButton(isEditButtonDisabled, id))),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

@@ -33,6 +33,14 @@ export function expense(expenses) {
   };
 }
 
+export function editButton(isEditButtonDisabled, id) {
+  return {
+    type: 'EDITBUTTON',
+    isEditButtonDisabled,
+    id,
+  };
+}
+
 export function fetchQuote() {
   return async (dispatch) => {
     const response = await getCurrency();

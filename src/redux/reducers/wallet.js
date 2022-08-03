@@ -4,6 +4,8 @@ const INITIAL_STATE = {
   loading: false,
   quote: {},
   expenses: [],
+  isEditButtonDisabled: true,
+  id: 0,
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
@@ -35,6 +37,12 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: action.expenses,
+    };
+  case 'EDITBUTTON':
+    return {
+      ...state,
+      isEditButtonDisabled: action.isEditButtonDisabled,
+      id: action.id,
     };
   default:
     return state;

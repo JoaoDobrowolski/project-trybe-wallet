@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { expense, fetchCurrency, fetchQuote } from '../redux/actions';
+import { editButton, expense, fetchCurrency, fetchQuote } from '../redux/actions';
 
 const alimentacao = 'Alimentação';
 
@@ -22,7 +22,7 @@ class WalletForm extends Component {
 
   componentDidMount() {
     const { getCurrency } = this.props;
-    getCurrency();
+    getCurrency(); // dispatch
   }
 
   handleChange = ({ target }) => {
@@ -36,39 +36,45 @@ class WalletForm extends Component {
   createObj = () => {
     const { id, value, description, currency, method,
       tag, exchangeRates } = this.state;
-    let obj = {};
-    if (value === '') {
-      obj = {
-        id,
-        value: 0,
-        description,
-        currency,
-        method,
-        tag,
-        exchangeRates,
-      };
+    const obj = {
+      id,
+      value: value === '' ? 0 : value,
+      description,
+      currency,
+      method,
+      tag,
+      exchangeRates,
+    };
+    const { newExpenses, editId, isEditDisabled } = this.props; // mapState
+    console.log('botao despesa', [...newExpenses, obj]);
+    if (isEditDisabled === true) {
+      console.log('add despesa', isEditDisabled);
+      this.setState({
+        id: id + 1,
+        expenses: [...newExpenses, obj], // ajuda do Dhiego
+      });
     } else {
-      obj = {
-        id,
-        value,
-        description,
-        currency,
-        method,
-        tag,
-        exchangeRates,
-      };
+      // const arrayEdit = [...newExpenses].filter((element) => element.id === editId);
+      // ^array que vou edita => pegar no [...newExpenses] e modificar o que tem id diferente (sei la se vai da boa)
+      const arrayEdit = [...newExpenses];
+      arrayEdit[editId].value = obj.value;
+      arrayEdit[editId].description = obj.description;
+      arrayEdit[editId].currency = obj.currency;
+      arrayEdit[editId].method = obj.method;
+      arrayEdit[editId].tag = obj.tag;
+      arrayEdit[editId].exchangeRates = obj.exchangeRates;
+      console.log('edit despesa', arrayEdit);
+      console.log('edit despesa', obj);
+      this.setState({
+        expenses: [...newExpenses],
+      });
     }
-    const { newExpenses } = this.props; // do mapState
-    this.setState({
-      id: id + 1,
-      expenses: [...newExpenses, obj], // ajuda do Dhiego
-    });
   };
 
-  handleClick = async () => {
+  handleAddClick = async () => {
     const { getQuote } = this.props;
-    await getQuote();
-    const { quote } = this.props;
+    await getQuote(); // dispatch
+    const { quote } = this.props; // mapState
     this.setState({ exchangeRates: quote });
     this.createObj();
     const { expenses } = this.state;
@@ -81,12 +87,19 @@ class WalletForm extends Component {
       tag: alimentacao,
     });
     const { prices } = this.props;
-    prices(expenses);
+    prices(expenses); // dispatch
+  };
+
+  handleEditClick = async () => {
+    await this.handleAddClick();
+    const { isEditDisabledWF } = this.props;
+    isEditDisabledWF(true);
   };
 
   render() {
-    const { value, description, currency, method, tag } = this.state;
-    const { currencies } = this.props;
+    const { value, description, currency,
+      method, tag } = this.state;
+    const { currencies, isEditDisabled } = this.props; // mapState
     return (
       <div className="wallet">
         <label htmlFor="valueInput">
@@ -161,15 +174,27 @@ class WalletForm extends Component {
             <option value="Saúde">Saúde</option>
           </select>
         </label>
-
-        <button
-          type="button"
-          name="buttonAdd"
-          onClick={ () => this.handleClick() }
-        >
-          Adicionar despesa
-        </button>
-
+        { isEditDisabled
+          ? (
+            <button
+              type="button"
+              name="buttonAdd"
+              onClick={ () => this.handleAddClick() }
+            // disabled={ !isEditDisabled }
+            >
+              Adicionar despesa
+            </button>
+          )
+          : (
+            <button
+              type="button"
+              name="buttonEdit"
+              onClick={ () => this.handleEditClick() }
+            // disabled={ isEditDisabled }
+            >
+              Editar despesa
+            </button>
+          ) }
       </div>
     );
   }
@@ -182,18 +207,25 @@ WalletForm.propTypes = {
   quote: PropTypes.shape({}).isRequired,
   prices: PropTypes.func.isRequired,
   newExpenses: PropTypes.shape({}).isRequired,
+  isEditDisabled: PropTypes.bool.isRequired,
+  isEditDisabledWF: PropTypes.bool.isRequired,
+  editId: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (store) => ({
   currencies: store.wallet.currencies,
   quote: store.wallet.quote,
   newExpenses: store.wallet.expenses,
+  isEditDisabled: store.wallet.isEditButtonDisabled,
+  editId: store.wallet.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getCurrency: () => dispatch(fetchCurrency()),
   getQuote: () => dispatch(fetchQuote()),
   prices: (expenses) => dispatch(expense(expenses)),
+  isEditDisabledWF: (isEditButtonDisabled, id) => (
+    dispatch(editButton(isEditButtonDisabled, id))),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
