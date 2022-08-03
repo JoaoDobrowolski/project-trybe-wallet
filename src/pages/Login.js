@@ -46,41 +46,45 @@ class Login extends React.Component {
   render() {
     const { email, password, isLoginButtonDisabled } = this.state;
     return (
-      <div className="login">
-        <span className="logo-trybe">
-          TR
-          <span className="y-logo-trybe">
-            Y
-          </span>
-          BE
-        </span>
-        <input
-          type="email"
-          id="emailInput"
-          placeholder="Email"
-          data-testid="email-input"
-          name="email"
-          value={ email }
-          onChange={ this.handleChange }
-        />
-        <input
-          type="password"
-          data-testid="password-input"
-          id="passwordInput"
-          placeholder="Senha"
-          name="password"
-          value={ password }
-          onChange={ this.handleChange }
-        />
-        <button
-          type="button"
-          name="buttonLogin"
-          id="button-login"
-          disabled={ isLoginButtonDisabled }
-          onClick={ this.handleLogin }
-        >
-          Entrar
-        </button>
+      <div className="outside-login">
+        <div className="login">
+          <div className="logo-trybe">
+            <span>
+              TR
+              <span className="y-logo-trybe">
+                Y
+              </span>
+              BE
+            </span>
+          </div>
+          <input
+            type="email"
+            id="emailInput"
+            placeholder="Email"
+            data-testid="email-input"
+            name="email"
+            value={ email }
+            onChange={ this.handleChange }
+          />
+          <input
+            type="password"
+            data-testid="password-input"
+            id="passwordInput"
+            placeholder="Senha"
+            name="password"
+            value={ password }
+            onChange={ this.handleChange }
+          />
+          <button
+            type="button"
+            name="buttonLogin"
+            id="button-login"
+            disabled={ isLoginButtonDisabled }
+            onClick={ this.handleLogin }
+          >
+            Entrar
+          </button>
+        </div>
       </div>
     );
   }

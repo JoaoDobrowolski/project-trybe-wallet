@@ -1,13 +1,42 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: linear-gradient( rgb(222, 240, 250), rgb(181, 232, 248));
+  height: 100vh;
+}
+
+.outside-login {
+  background-image: linear-gradient(rgb(237, 239, 213), rgb(62, 255, 220));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .login {
-  margin: 10px;
+  background-image: linear-gradient( rgb(15, 2, 26), rgba(20, 223, 245, 0.904), rgb(15, 2, 26));
+  border: 1px solid rgb(15, 2, 26);
+  border-radius: 10px;
+  padding: 50px 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  transition: 0.3s;
+}
 
+.login:hover {
+  border: 1px solid rgb(33, 187, 182);
+  border-radius: 20px;
+  padding: 55px 88px;
 }
 
 .logo-trybe {
+  display: flex;
   margin: 10px;
   font-size: 1cm;
   font-family: arial;
@@ -23,23 +52,155 @@
   color: white;
 }
 
+.login input {
+  margin: 1px;
+  padding: 4px;
+  height: 25px;
+  width: 250px;
+  font-size: medium;
+}
+
+button {
+  margin: 10px;
+  padding: 2px 10px;
+  height: 30px;
+  width: 100px;
+  font-size: large;
+  transition: 0.5s;
+  text-align: center;
+  border-radius: 5%;
+  border: 0;
+}
+
+#button-login:enabled {
+  background-image: linear-gradient( rgba(20, 223, 245, 0.95),rgba(13, 16, 43, 0.9),rgba(13, 16, 43, 0.8), rgba(20, 223, 245, 0.9));
+  color: white;
+}
+
+#button-login:disabled {
+  background-image: linear-gradient( rgba(29, 13, 43, 0.716), rgba(20, 223, 245, 0.904), rgba(29, 13, 43, 0.716));
+  color: black;
+}
+
+button:enabled {
+  filter: brightness(120%);
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.5;
+}
+
+button:hover {
+  filter: brightness(150%);
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   padding: 10px;
+  background-image: linear-gradient(to right, rgb(11, 23, 63), rgba(20, 223, 245, 0.904));
+  font-size: large;
+  text-shadow: 0px 0px 1px rgb(11, 23, 63);
+  font-weight: 700;
+}
+
+#email-header {
+  color: white;
+  text-shadow: 0px 0px 1px rgba(20, 223, 245, 0.904);
 }
 
 .wallet {
   display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.wallet label {
+  padding: 5px;
+  display: flex;
   flex-direction: column;
 }
 
+.wallet input, .wallet select {
+  font-size: medium;
+  padding: 2px;
+}
+
+#valueInput {
+  width: 80px;
+}
+
+#descriptionInput {
+  width: 200px;
+}
+
+#addExpenseButton {
+  background-image: linear-gradient( rgb(22, 190, 100), rgb(8, 95, 60));
+  color: white;
+  height: 50px;
+  text-shadow: 0 0 2px black;
+}
+
+#editExpenseButton {
+  background-image: linear-gradient( rgb(179, 190, 22), rgb(86, 95, 8));
+  color: white;
+  height: 50px;
+  text-shadow: 0 0 2px black;
+}
+
 table {
+  width: 98%;
+  margin: 1%;
 	border-collapse: collapse;
-    font-family: Tahoma, Geneva, sans-serif;
-    border: 1px solid black;
-  }
+  font-family: Tahoma, Geneva, sans-serif;
+  border: 1px solid black;
+}
+
 table th {
-	padding: 15px;
+  height: 60px;
+  background-image: linear-gradient( rgba(22, 159, 190, 0.469), rgba(8, 70, 95, 0.537));
+}
+
+table td {
+  background-image: linear-gradient( rgba(22, 159, 190, 0.257), rgba(8, 70, 95, 0.308));
+}
+
+table th, table td {
+	padding: 5px 10px;
 	border: 1px solid #dddfe1;
+  text-align: center;
+}
+
+#edit-button {
+  background-image: linear-gradient( rgb(179, 190, 22), rgb(86, 95, 8));
+  color: white;
+  text-shadow: 0 0 2px black;
+  margin: 2px;
+}
+
+#delete-button {
+  background-image: linear-gradient( rgb(190, 67, 22), rgb(95, 8, 8));
+  color: white;
+  text-shadow: 0 0 2px black;
+  margin: 2px;
+}
+
+@media screen and (max-width:980px) {
+  .wallet {
+    flex-direction: column;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .wallet input, .wallet select, #valueInput, #descriptionInput {
+    width: 300px;
+  }
+
+  table th, table td {
+    padding: 2px 4px;
+  }
 }

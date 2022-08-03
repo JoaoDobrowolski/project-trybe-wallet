@@ -15,7 +15,11 @@ class Table extends Component {
   handleEditButton = (id) => {
     const { isEditDisabled } = this.props; // mapState
     isEditDisabled(false, id); // dispatch
-    console.log('editar: false');
+    const editTr = document.getElementsByClassName('trs');
+    const arr = Array.prototype.slice.call(editTr); // https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
+    const indexTr = arr.map((element) => parseFloat(element.id))
+      .filter((ids) => ids === id);
+    editTr[indexTr].style.backgroundColor = 'yellow';
   };
 
   render() {
@@ -40,7 +44,7 @@ class Table extends Component {
             { expenses
               && (
                 expenses.map((element) => (
-                  <tr key={ element.id }>
+                  <tr className="trs" id={ element.id } key={ element.id }>
                     <td>{ element.description }</td>
                     <td>{ element.tag }</td>
                     <td>{ element.method }</td>

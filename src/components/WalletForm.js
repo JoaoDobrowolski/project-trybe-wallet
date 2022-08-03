@@ -46,16 +46,12 @@ class WalletForm extends Component {
       exchangeRates,
     };
     const { newExpenses, editId, isEditDisabled } = this.props; // mapState
-    console.log('botao despesa', [...newExpenses, obj]);
     if (isEditDisabled === true) {
-      console.log('add despesa', isEditDisabled);
       this.setState({
         id: id + 1,
         expenses: [...newExpenses, obj], // ajuda do Dhiego
       });
     } else {
-      // const arrayEdit = [...newExpenses].filter((element) => element.id === editId);
-      // ^array que vou edita => pegar no [...newExpenses] e modificar o que tem id diferente (sei la se vai da boa)
       const arrayEdit = [...newExpenses];
       arrayEdit[editId].value = obj.value;
       arrayEdit[editId].description = obj.description;
@@ -63,10 +59,8 @@ class WalletForm extends Component {
       arrayEdit[editId].method = obj.method;
       arrayEdit[editId].tag = obj.tag;
       arrayEdit[editId].exchangeRates = obj.exchangeRates;
-      console.log('edit despesa', arrayEdit);
-      console.log('edit despesa', obj);
       this.setState({
-        expenses: [...newExpenses],
+        expenses: arrayEdit,
       });
     }
   };
@@ -144,7 +138,7 @@ class WalletForm extends Component {
         </label>
 
         <label htmlFor="methodInput">
-          Método de Pagamento
+          Método de Pagamento:
           <select
             id="methodInput"
             data-testid="method-input"
@@ -159,7 +153,7 @@ class WalletForm extends Component {
         </label>
 
         <label htmlFor="tagInput">
-          Tag
+          Tag:
           <select
             id="tagInput"
             data-testid="tag-input"
@@ -177,6 +171,7 @@ class WalletForm extends Component {
         { isEditDisabled
           ? (
             <button
+              id="addExpenseButton"
               type="button"
               name="buttonAdd"
               onClick={ () => this.handleAddClick() }
@@ -187,6 +182,7 @@ class WalletForm extends Component {
           )
           : (
             <button
+              id="editExpenseButton"
               type="button"
               name="buttonEdit"
               onClick={ () => this.handleEditClick() }
