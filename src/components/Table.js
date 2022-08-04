@@ -18,15 +18,15 @@ class Table extends Component {
   handleEditButton = (id) => {
     const { isEditDisabled } = this.props; // mapState
     isEditDisabled(false, id); // dispatch
-    // const arr = Array.prototype.slice.call(editTr); // https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
-    // const indexTr = arr.map((element) => parseFloat(element.id))
-    //   .filter((ids) => ids === id);
-    // editTr[indexTr].classList.add('editYellow');
+    const arr = Array.prototype.slice.call(editTr); // https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
+    const indexTr = arr.map((element) => parseFloat(element.id))
+      .filter((ids) => ids === id);
+    editTr[indexTr].classList.add('editYellow');
 
-    // const arrOfButtons = Array.prototype.slice.call(tableButtons);
-    // for (let index = 0; index < arrOfButtons.length; index += 1) {
-    //   arrOfButtons[index].style.visibility = 'hidden';
-    // }
+    const arrOfButtons = Array.prototype.slice.call(tableButtons);
+    for (let index = 0; index < arrOfButtons.length; index += 1) {
+      arrOfButtons[index].style.visibility = 'hidden';
+    }
   };
 
   render() {

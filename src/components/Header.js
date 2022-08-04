@@ -4,13 +4,6 @@ import { connect } from 'react-redux';
 import toRound from '../rounder';
 
 class Header extends Component {
-  // getExpenses = () => {
-  //   const { expenses } = this.props;
-  //   return (expenses.reduce((acc, cur) => toRound((acc) + parseFloat(cur.value)
-  //     * parseFloat(cur.exchangeRates[cur.currency].ask)), 0))
-  //     .toFixed(2);
-  // };
-
   render() {
     const { user, expenses } = this.props;
     return (
@@ -19,18 +12,12 @@ class Header extends Component {
           <span id="email-header" data-testid="email-field">{ user }</span>
         </div>
         <div>
-          {
-            expenses
-              ? (
-                <span data-testid="total-field">
-                  {
-                    expenses.reduce((acc, cur) => toRound((acc) + parseFloat(cur.value)
-                      * parseFloat(cur.exchangeRates[cur.currency].ask)), 0).toFixed(2)
-                  }
-                </span>
-              )
-              : <span data-testid="total-field">0</span>
-          }
+          <span data-testid="total-field">
+            {
+              expenses.reduce((acc, cur) => toRound((acc) + parseFloat(cur.value)
+                * parseFloat(cur.exchangeRates[cur.currency].ask)), 0).toFixed(2)
+            }
+          </span>
           <span data-testid="header-currency-field">BRL</span>
         </div>
       </div>

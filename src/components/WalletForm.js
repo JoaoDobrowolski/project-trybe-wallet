@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { editButton, expense, fetchCurrency, fetchQuote } from '../redux/actions';
-// import { editTr, tableButtons } from './Table';
+import { editTr, tableButtons } from './Table';
 
 const alimentacao = 'Alimentação';
 
@@ -28,7 +28,6 @@ class WalletForm extends Component {
 
   handleChange = ({ target }) => {
     const { name } = target;
-    // const value = target.value;
     this.setState({
       [name]: target.value,
     });
@@ -53,15 +52,15 @@ class WalletForm extends Component {
         expenses: [...newExpenses, obj], // ajuda do Dhiego
       });
     } else {
-      // const arr = Array.prototype.slice.call(editTr); // https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
-      // const indexTr = arr.map((element) => parseFloat(element.id))
-      //   .filter((ids) => ids === editId);
-      // editTr[indexTr].classList.remove('editYellow');
+      const arr = Array.prototype.slice.call(editTr); // https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
+      const indexTr = arr.map((element) => parseFloat(element.id))
+        .filter((ids) => ids === editId);
+      editTr[indexTr].classList.remove('editYellow');
 
-      // const arrOfButtons = Array.prototype.slice.call(tableButtons);
-      // for (let index = 0; index < arrOfButtons.length; index += 1) {
-      //   arrOfButtons[index].style.visibility = 'visible';
-      // }
+      const arrOfButtons = Array.prototype.slice.call(tableButtons);
+      for (let index = 0; index < arrOfButtons.length; index += 1) {
+        arrOfButtons[index].style.visibility = 'visible';
+      }
 
       const arrayEdit = [...newExpenses];
       arrayEdit[editId].value = obj.value;
