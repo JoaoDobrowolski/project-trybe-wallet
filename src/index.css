@@ -168,6 +168,14 @@ table td {
   background-image: linear-gradient( rgba(22, 159, 190, 0.257), rgba(8, 70, 95, 0.308));
 }
 
+.editBlue {
+  background-image: linear-gradient( rgba(22, 159, 190, 0.257), rgba(8, 70, 95, 0.308));
+}
+
+.editYellow {
+  background-image: linear-gradient( rgb(221, 228, 10), rgb(254, 195, 0));
+}
+
 table th, table td {
 	padding: 5px 10px;
 	border: 1px solid #dddfe1;
@@ -175,7 +183,7 @@ table th, table td {
 }
 
 #edit-button {
-  background-image: linear-gradient( rgb(179, 190, 22), rgb(86, 95, 8));
+  background-image: linear-gradient( rgb(220, 227, 17), rgb(86, 95, 8));
   color: white;
   text-shadow: 0 0 2px black;
   margin: 2px;

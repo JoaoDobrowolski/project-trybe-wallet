@@ -3,6 +3,7 @@ const getCurrency = async () => {
   const response = await fetch(endPoint);
   const currencies = await response.json();
   // return currencies;
+  // console.log(Promise.reject(currencies));
   return response.ok ? Promise.resolve(currencies) : Promise.reject(currencies);
 };
 

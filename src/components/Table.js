@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import toRound from '../rounder';
 import { editButton, expense } from '../redux/actions';
 
+export const editTr = document.getElementsByClassName('trs');
+export const tableButtons = document.getElementsByClassName('table-buttons');
+
 class Table extends Component {
   handleDeleteButton = (id) => {
     const { expenses } = this.props; // mapState
@@ -15,11 +18,15 @@ class Table extends Component {
   handleEditButton = (id) => {
     const { isEditDisabled } = this.props; // mapState
     isEditDisabled(false, id); // dispatch
-    const editTr = document.getElementsByClassName('trs');
-    const arr = Array.prototype.slice.call(editTr); // https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
-    const indexTr = arr.map((element) => parseFloat(element.id))
-      .filter((ids) => ids === id);
-    editTr[indexTr].style.backgroundColor = 'yellow';
+    // const arr = Array.prototype.slice.call(editTr); // https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
+    // const indexTr = arr.map((element) => parseFloat(element.id))
+    //   .filter((ids) => ids === id);
+    // editTr[indexTr].classList.add('editYellow');
+
+    // const arrOfButtons = Array.prototype.slice.call(tableButtons);
+    // for (let index = 0; index < arrOfButtons.length; index += 1) {
+    //   arrOfButtons[index].style.visibility = 'hidden';
+    // }
   };
 
   render() {
@@ -29,7 +36,7 @@ class Table extends Component {
         <table>
           <thead>
             <tr>
-              <th data-testid="desc">Descrição</th>
+              <th>Descrição</th>
               <th>Tag</th>
               <th>Método de pagamento</th>
               <th>Valor</th>
@@ -41,11 +48,11 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            { expenses
+            { (expenses)
               && (
                 expenses.map((element) => (
                   <tr className="trs" id={ element.id } key={ element.id }>
-                    <td>{ element.description }</td>
+                    <td className="tds" data-testid="desc">{ element.description }</td>
                     <td>{ element.tag }</td>
                     <td>{ element.method }</td>
                     <td>{ toRound(element.value).toFixed(2) }</td>
@@ -63,6 +70,7 @@ class Table extends Component {
                     <td>Real</td>
                     <td>
                       <button
+                        className="table-buttons"
                         id="edit-button"
                         data-testid="edit-btn"
                         type="button"
@@ -71,6 +79,7 @@ class Table extends Component {
                         Editar
                       </button>
                       <button
+                        className="table-buttons"
                         id="delete-button"
                         name="deleteButton"
                         type="button"
@@ -104,7 +113,6 @@ const mapDispatchToProps = (dispatch) => ({
   prices: (expensesAfterDelete) => dispatch(expense(expensesAfterDelete)),
   isEditDisabled: (isEditButtonDisabled, id) => (
     dispatch(editButton(isEditButtonDisabled, id))),
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
