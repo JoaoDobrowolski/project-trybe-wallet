@@ -7,7 +7,7 @@ Ao utilizar essa aplicação um usuário deverá ser capaz de:
  - Visualizar uma tabela com seus gastos;
  - Visualizar o total de gastos convertidos para uma moeda de escolha.
 
-------
+-----
 
 # Habilidades
 
@@ -25,11 +25,15 @@ O projeto foi realizado com o intuito de desenvolver e aperfeiçoar as habilidad
 
 - _actions_ assíncronas na aplicação React que faz uso de Redux.
 
+-----
+
 # Instalação
 
 Para instalar as dependências, execute o seguinte comando no terminal:
 
 npm install
+
+-----
 
 # Uso
 
@@ -39,6 +43,7 @@ npm start
 
 Isso iniciará a aplicação em modo de desenvolvimento. Abra http://localhost:3000 para visualizá-la no navegador.
 
+-----
 
 # Contribuindo
 
@@ -54,6 +59,7 @@ Etapas a seguir para contribuir com o projeto:
 
 - Abrir um pull request no repositório original.
 
+-----
 
 # Autor
 
