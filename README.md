@@ -31,7 +31,7 @@ O projeto foi realizado com o intuito de desenvolver e aperfeiçoar as habilidad
 
 Para instalar as dependências, execute o seguinte comando no terminal:
 
-npm install
+`npm install`
 
 -----
 
@@ -39,7 +39,7 @@ npm install
 
 Para iniciar o projeto, execute o seguinte comando no terminal:
 
-npm start
+`npm start`
 
 Isso iniciará a aplicação em modo de desenvolvimento. Abra http://localhost:3000 para visualizá-la no navegador.
 
