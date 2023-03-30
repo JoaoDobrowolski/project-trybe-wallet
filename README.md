@@ -4,8 +4,10 @@ Neste projeto Front-End foi desenvolvido uma carteira de controle de gastos com 
 Ao utilizar essa aplicação um usuário deverá ser capaz de:
 
  - Adicionar, remover e editar um gasto;
- - Visualizar uma tabelas com seus gastos;
- - Visualizar o total de gastos convertidos para uma moeda de escolha;
+ - Visualizar uma tabela com seus gastos;
+ - Visualizar o total de gastos convertidos para uma moeda de escolha.
+
+------
 
 # Habilidades
 
@@ -42,15 +44,15 @@ Isso iniciará a aplicação em modo de desenvolvimento. Abra http://localhost:3
 
 Etapas a seguir para contribuir com o projeto:
 
-Realizar o fork do repositório;
+- Realizar o fork do repositório;
 
-Criar uma branch: git checkout -b (minha-contribuicao);
+- Criar uma branch: git checkout -b (minha-contribuicao);
 
-Fazer as mudanças desejadas e commit: git commit -m "(Minha contribuição)";
+- Fazer as mudanças desejadas e commit: git commit -m "(Minha contribuição)";
 
-Enviar para a sua branch: git push origin (minha-contribuicao);
+- Enviar para a sua branch: git push origin (minha-contribuicao);
 
-Abrir um pull request no repositório original.
+- Abrir um pull request no repositório original.
 
 
 # Autor
