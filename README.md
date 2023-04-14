@@ -63,4 +63,4 @@ Etapas a seguir para contribuir com o projeto:
 
 # Autor
 
-O projeto Trybe-Wallet foi desenvolvido por João Felipe Dobrowolski durante o curso da Trybe.
+O projeto Trybe-Wallet foi desenvolvido por João Felipe Dobrowolski durante o curso da <a href="https://www.betrybe.com/" target="_blank">Trybe</a>.
